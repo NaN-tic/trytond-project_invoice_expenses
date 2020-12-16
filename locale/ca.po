@@ -1,0 +1,71 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:project.expense,cost_price:"
+msgid "Cost Price"
+msgstr "Preu de cost"
+
+msgctxt "field:project.expense,description:"
+msgid "Description"
+msgstr "Descripció"
+
+msgctxt "field:project.expense,invoice_line:"
+msgid "Invoice Line"
+msgstr "Línia de factura"
+
+msgctxt "field:project.expense,invoiceable:"
+msgid "Invoiceable"
+msgstr "Facturable"
+
+msgctxt "field:project.expense,origin:"
+msgid "Origin"
+msgstr "Origen"
+
+msgctxt "field:project.expense,product:"
+msgid "Product"
+msgstr "Producte"
+
+msgctxt "field:project.expense,quantity:"
+msgid "Quantity"
+msgstr "Quantitat"
+
+msgctxt "field:project.expense,unit_price:"
+msgid "Unit Price"
+msgstr "Preu unitari"
+
+msgctxt "field:project.expense,uom:"
+msgid "UoM"
+msgstr "UdM"
+
+msgctxt "field:project.expense,uom_category:"
+msgid "UoM Category"
+msgstr "Categoria UdM"
+
+msgctxt "field:project.expense,uom_digits:"
+msgid "UoM Digits"
+msgstr "Dígits UdM"
+
+msgctxt "field:project.expense,work:"
+msgid "Work"
+msgstr "Treball"
+
+msgctxt "field:project.work,expenses:"
+msgid "Expenses"
+msgstr "Despeses"
+
+msgctxt "model:ir.model.button,string:project_button_sync_expenses"
+msgid "Sync Expenses"
+msgstr "Sincronitzar despesa"
+
+msgctxt "model:project.expense,name:"
+msgid "Projecte Expense"
+msgstr "Despesa del projecte"
+
+msgctxt "selection:project.expense,invoiceable:"
+msgid "No"
+msgstr "No"
+
+msgctxt "selection:project.expense,invoiceable:"
+msgid "Yes"
+msgstr "Si"
