@@ -1,0 +1,9 @@
+<tree editable="bottom">
+    <field name="work"/>
+    <field name="product"/>
+    <field name="quantity"/>
+    <field name="uom"/>
+    <field name="invoiceable"/>
+    <field name="description"/>
+    <field name="origin"/>
+</tree>

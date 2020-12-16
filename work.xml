@@ -1,0 +1,26 @@
+<tryton>
+    <data>
+        <record model="ir.ui.view" id="project_expense_form_view">
+            <field name="model">project.expense</field>
+            <field name="type">form</field>
+            <field name="name">expense_form</field>
+        </record>
+        <record model="ir.ui.view" id="project_expense_tree_view">
+            <field name="model">project.expense</field>
+            <field name="type">tree</field>
+            <field name="name">expense_tree</field>
+        </record>
+
+        <record model="ir.ui.view" id="work_view_form">
+            <field name="model">project.work</field>
+            <field name="inherit" ref="project.work_view_form"/>
+            <field name="name">work_form</field>
+        </record>
+
+        <record model="ir.model.button" id="project_button_sync_expenses">
+            <field name="name">sync_expenses</field>
+            <field name="string">Sync Expenses</field>
+            <field name="model" search="[('model', '=', 'project.work')]"/>
+        </record>
+    </data>
+</tryton>

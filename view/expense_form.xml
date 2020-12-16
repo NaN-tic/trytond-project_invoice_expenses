@@ -1,0 +1,19 @@
+<form>
+    <label name="work"/>
+    <field name="work"/>
+    <newline/>
+    <label name="product"/>
+    <field name="product"/>
+    <label name="uom"/>
+    <field name="uom"/>
+    <label name="quantity"/>
+    <field name="quantity"/>
+    <label name="description"/>
+    <field name="description"/>
+    <label name="invoiceable"/>
+    <field name="invoiceable"/>
+    <label name="origin"/>
+    <field name="origin"/>
+    <label name="invoice_line"/>
+    <field name="invoice_line"/>
+</form>

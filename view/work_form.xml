@@ -1,0 +1,8 @@
+<data>
+    <xpath expr="/form/notebook" position="inside">
+        <page name="expenses">
+            <field name="expenses" colspan="4"/>
+            <button name="sync_expenses"/>
+        </page>
+    </xpath>
+</data>
