@@ -190,3 +190,32 @@ class Project(metaclass=PoolMeta):
         for expense in self.expenses:
             lines += expense._get_invoice_lines()
         return lines
+
+
+class AnalyticAccountEntry(metaclass=PoolMeta):
+    __name__ = 'analytic.account.entry'
+
+    @classmethod
+    def _get_origin(cls):
+        origins = super(AnalyticAccountEntry, cls)._get_origin()
+        return origins + ['project.expense']
+
+    @fields.depends('origin')
+    def on_change_with_company(self, name=None):
+        pool = Pool()
+        ProjectExpense = pool.get('project.expense')
+
+        company = super(AnalyticAccountEntry, self).on_change_with_company(
+            name)
+        if isinstance(self.origin, ProjectExpense):
+            company = self.origin.work.company.id
+        return company
+
+    @classmethod
+    def search_company(cls, name, clause):
+        domain = super(AnalyticAccountEntry, cls).search_company(name, clause),
+        return ['OR',
+            domain,
+            (('origin.work.' + clause[0],) + tuple(clause[1:3])
+                + ('project.expense',) + tuple(clause[3:])),
+            ]
