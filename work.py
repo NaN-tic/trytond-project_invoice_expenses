@@ -95,7 +95,7 @@ class Expense(ModelSQL, ModelView):
                 'quantity': self.quantity,
                 'unit': self.uom,
                 'unit_price': self.unit_price or Decimal(0),
-                'origin': self,
+                'origins': [self],
                 'description': self.description,
                 }]
 
@@ -180,10 +180,10 @@ class Project(metaclass=PoolMeta):
         expense.cost_price = purchase_line.unit_price
         return expense
 
-    def _get_lines_to_invoice(self, test=None):
-        lines, uninvoiced = super()._get_lines_to_invoice(test)
+    def _get_lines_to_invoice(self):
+        lines = super()._get_lines_to_invoice()
         lines += self._get_expense_lines_to_invoice()
-        return lines, uninvoiced
+        return lines
 
     def _get_expense_lines_to_invoice(self):
         lines = []
