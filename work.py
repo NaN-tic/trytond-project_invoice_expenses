@@ -159,6 +159,8 @@ class Project(metaclass=PoolMeta):
         return expenses
 
     def _get_expense_move(self, move):
+        Expense = Pool().get('project.expense')
+
         if move.state != 'done':
             return
         expense = Expense()
@@ -171,6 +173,8 @@ class Project(metaclass=PoolMeta):
         return expense
 
     def _get_expense_purchase_line(self, purchase_line):
+        Expense = Pool().get('project.expense')
+
         expense = Expense()
         expense.work = self
         expense.origin = purchase_line
