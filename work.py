@@ -86,18 +86,33 @@ class Expense(ModelSQL, ModelView):
         return 2
 
     def _get_invoice_lines(self):
+        pool = Pool()
+        try:
+            AnalyticAccountEntry = pool.get('analytic.account.entry')
+        except KeyError:
+            AnalyticAccountEntry = None
+
         if not self.invoiceable == 'yes' or not self.quantity:
             # TODO: Raise a UserError if invoiceable is empty
             return []
 
-        return [{
+        line = {
                 'product': self.product,
                 'quantity': self.quantity,
                 'unit': self.uom,
                 'unit_price': self.unit_price or Decimal(0),
                 'origins': [self],
                 'description': self.description,
-                }]
+                }
+        if AnalyticAccountEntry:
+            if self.work.analytic_accounts:
+                new_entries = AnalyticAccountEntry.copy(
+                    self.work.analytic_accounts,
+                    default={
+                        'origin': None,
+                        })
+                line['analytic_accounts'] = new_entries
+        return [line]
 
 
 class Project(metaclass=PoolMeta):
@@ -194,32 +209,3 @@ class Project(metaclass=PoolMeta):
         for expense in self.expenses:
             lines += expense._get_invoice_lines()
         return lines
-
-
-class AnalyticAccountEntry(metaclass=PoolMeta):
-    __name__ = 'analytic.account.entry'
-
-    @classmethod
-    def _get_origin(cls):
-        origins = super(AnalyticAccountEntry, cls)._get_origin()
-        return origins + ['project.expense']
-
-    @fields.depends('origin')
-    def on_change_with_company(self, name=None):
-        pool = Pool()
-        ProjectExpense = pool.get('project.expense')
-
-        company = super(AnalyticAccountEntry, self).on_change_with_company(
-            name)
-        if isinstance(self.origin, ProjectExpense):
-            company = self.origin.work.company.id
-        return company
-
-    @classmethod
-    def search_company(cls, name, clause):
-        domain = super(AnalyticAccountEntry, cls).search_company(name, clause),
-        return ['OR',
-            domain,
-            (('origin.work.' + clause[0],) + tuple(clause[1:3])
-                + ('project.expense',) + tuple(clause[3:])),
-            ]

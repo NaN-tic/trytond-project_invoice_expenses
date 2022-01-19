@@ -9,7 +9,3 @@ def register():
         work.Expense,
         work.Project,
         module='project_invoice_expenses', type_='model')
-    Pool.register(
-        work.AnalyticAccountEntry,
-        depends=['analytic_project'],
-        module='project_invoice_expenses', type_='model')
