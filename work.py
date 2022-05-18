@@ -86,18 +86,33 @@ class Expense(ModelSQL, ModelView):
         return 2
 
     def _get_invoice_lines(self):
+        pool = Pool()
+        try:
+            AnalyticAccountEntry = pool.get('analytic.account.entry')
+        except KeyError:
+            AnalyticAccountEntry = None
+
         if not self.invoiceable == 'yes' or not self.quantity:
             # TODO: Raise a UserError if invoiceable is empty
             return []
 
-        return [{
+        line = {
                 'product': self.product,
                 'quantity': self.quantity,
                 'unit': self.uom,
                 'unit_price': self.unit_price or Decimal(0),
                 'origins': [self],
                 'description': self.description,
-                }]
+                }
+        if AnalyticAccountEntry:
+            if self.work.analytic_accounts:
+                new_entries = AnalyticAccountEntry.copy(
+                    self.work.analytic_accounts,
+                    default={
+                        'origin': None,
+                        })
+                line['analytic_accounts'] = new_entries
+        return [line]
 
 
 class Project(metaclass=PoolMeta):
