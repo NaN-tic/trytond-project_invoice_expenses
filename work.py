@@ -13,7 +13,7 @@ class Expense(ModelSQL, ModelView):
         }
     _depends = ['invoice_line']
 
-    work = fields.Many2One('project.work', 'Work', required=True, select=True,
+    work = fields.Many2One('project.work', 'Work', required=True,
         states=_states, depends=_depends)
     origin = fields.Reference('Origin', selection='get_origin', readonly=True)
     product = fields.Many2One('product.product', 'Product', required=True,
