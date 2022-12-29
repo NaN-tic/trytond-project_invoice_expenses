@@ -8,6 +8,10 @@
     <field name="uom"/>
     <label name="quantity"/>
     <field name="quantity"/>
+    <label name="cost_price"/>
+    <field name="cost_price"/>
+    <label name="unit_price"/>
+    <field name="unit_price"/>
     <label name="description"/>
     <field name="description"/>
     <label name="invoiceable"/>

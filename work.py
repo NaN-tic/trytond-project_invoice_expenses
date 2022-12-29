@@ -44,6 +44,8 @@ class Expense(ModelSQL, ModelView):
 
     del _states
 
+    # TODO: Add expense cost to the task/project
+
     @classmethod
     def _get_origin(cls):
         'Return list of Model names for origin Reference'
