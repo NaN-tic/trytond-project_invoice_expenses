@@ -44,6 +44,8 @@ class Expense(ModelSQL, ModelView):
 
     del _states
 
+    # TODO: Add expense cost to the task/project
+
     @classmethod
     def _get_origin(cls):
         'Return list of Model names for origin Reference'
@@ -89,6 +91,8 @@ class Expense(ModelSQL, ModelView):
         if not self.invoiceable == 'yes' or not self.quantity:
             # TODO: Raise a UserError if invoiceable is empty
             return []
+
+        # TODO: Should not re-invoice once invoiced!
 
         return [{
                 'product': self.product,

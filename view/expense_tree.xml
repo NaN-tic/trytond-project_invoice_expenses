@@ -3,6 +3,8 @@
     <field name="product"/>
     <field name="quantity"/>
     <field name="uom"/>
+    <field name="cost_price"/>
+    <field name="unit_price"/>
     <field name="invoiceable"/>
     <field name="description"/>
     <field name="origin"/>
