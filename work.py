@@ -14,31 +14,30 @@ class Expense(ModelSQL, ModelView):
     _depends = ['invoice_line']
 
     work = fields.Many2One('project.work', 'Work', required=True,
-        states=_states, depends=_depends)
+        states=_states)
     origin = fields.Reference('Origin', selection='get_origin', readonly=True)
     product = fields.Many2One('product.product', 'Product', required=True,
-        states=_states, depends=_depends)
-    uom = fields.Many2One('product.uom', 'UoM', required=True, states=_states,
-        depends=_depends)
+        states=_states)
+    uom = fields.Many2One('product.uom', 'UoM', required=True, states=_states)
     uom_category = fields.Function(fields.Many2One('product.uom.category',
             'UoM Category'), 'on_change_with_uom_category')
     uom_digits = fields.Function(fields.Integer('UoM Digits'),
         'on_change_with_uom_digits')
     cost_price = fields.Numeric('Cost Price', digits=price_digits,
-        states=_states, depends=_depends)
+        states=_states)
     # TODO: Show field and apply price list
     unit_price = fields.Numeric('Unit Price', digits=price_digits,
-        states=_states, depends=_depends)
+        states=_states)
     # TODO: Add currency digits
     #amount = fields.Function(fields.Numeric('Amount'), '')
     quantity = fields.Float('Quantity', digits=(16, Eval('uom_digits', 2)),
-        required=True, states=_states, depends=_depends + ['uom_digits'])
-    description = fields.Char('Description', states=_states, depends=_depends)
+        required=True, states=_states)
+    description = fields.Char('Description', states=_states)
     invoiceable = fields.Selection([
             (None, ''),
             ('yes', 'Yes'),
             ('no', 'No'),
-            ], 'Invoiceable', states=_states, depends=_depends)
+            ], 'Invoiceable', states=_states)
     invoice_line = fields.Many2One('account.invoice.line', 'Invoice Line',
         readonly=True)
 
