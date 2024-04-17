@@ -20,7 +20,7 @@
         <record model="ir.model.button" id="project_button_sync_expenses">
             <field name="name">sync_expenses</field>
             <field name="string">Sync Expenses</field>
-            <field name="model" search="[('model', '=', 'project.work')]"/>
+            <field name="model">project.work</field>
         </record>
     </data>
 </tryton>
