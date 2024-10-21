@@ -183,7 +183,7 @@ class Project(metaclass=PoolMeta):
         expense.work = self
         expense.origin = move
         expense.product = move.product
-        expense.uom = move.uom
+        expense.uom = move.unit
         expense.quantity = move.quantity
         expense.cost_price = move.cost_price
         return expense
