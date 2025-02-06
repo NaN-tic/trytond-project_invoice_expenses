@@ -64,9 +64,9 @@ class Expense(ModelSQL, ModelView):
         Model = Pool().get('ir.model')
         models = cls._get_origin()
         models = Model.search([
-                ('model', 'in', models),
+                ('name', 'in', models),
                 ])
-        return [(None, '')] + [(m.model, m.name) for m in models]
+        return [(None, '')] + [(m.name, m.string) for m in models]
 
     @fields.depends('product')
     def on_change_product(self):
